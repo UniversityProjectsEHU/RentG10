@@ -78,6 +78,12 @@ main {
 #botonenviar{
     margin-left: 80px;
 }
+#banner{
+    width:423px; 
+    height:62px; 
+    margin:10px auto; /*CENTRA LA IMAGEN*/
+    display:block;
+}
 
 footer{
     background-color: #0F76A0; 
