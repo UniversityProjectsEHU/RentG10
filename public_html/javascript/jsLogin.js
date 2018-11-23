@@ -31,6 +31,7 @@ function borrardatos (evt) {
     /*Mostrar datos almacenados*/
     var nombreusuario = localStorage.getItem("Nombre");
     document.getElementById("nombree").innerHTML = nombreusuario;
+     location.href ="../html/pantallaInicial.html";
 }
 
 function validacion(){

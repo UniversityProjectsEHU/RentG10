@@ -71,16 +71,18 @@ main {
     margin:10px auto; /*CENTRA LA IMAGEN*/
     display:block;
 }
-#miformulario{
+#formconsulta{
     margin: 10px;
     margin-left: 500px;
 }
 #botonenviar{
     margin-left: 80px;
 }
-#imgadmin{
-    width:265px; 
-    height:100px; 
+#banner{
+    width:423px; 
+    height:62px; 
+    margin:10px auto; /*CENTRA LA IMAGEN*/
+    display:block;
 }
 
 footer{

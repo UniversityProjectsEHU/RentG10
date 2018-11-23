@@ -1,0 +1,47 @@
+<html lang="es">
+    <head>
+        <title>RentG - Consulta Reservas</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../css/cssConsultaUsuario.css">
+        <script src="../javascript/jsConsultaAdmin.js"></script>
+    </head>
+    <body>
+        <header id="cabecera">
+            <div>
+                <h1>RentG</h1>
+                <h2>La plataforma de alquiler de coches lider en el Pais Vasco</h2>
+                <a href="pantallaInicial.html"><img src="../imagenes/logpng.png" id="imglogo"></a>
+                <img src="../imagenes/silueta.png" id="imgsilueta">
+            </div>
+        </header>
+        <nav id="menuprincipal">
+            <div>
+                <ul>
+                    <li><a href="pantallaLogin.html">Login</a></li>
+                    <li><a href="pantallaReservar.html">Reservar</a></li>
+                    <li><a href="pantallaConsultaUsuario.html">Consultar Reservas</a></li>
+                    <li><a href="">Contacto</a></li>
+                </ul>
+            </div>
+        </nav>
+        <main>
+            <div> 
+                HOLA,
+                <label id="nombree"></label>
+                <input id="cerrarsesion" type="button" value="Cerrar Sesion" />
+                <section id="consulta">
+                    <img src="../imagenes/consulAdmin.PNG" id="imgtitulo">
+                    <form id="formconsulta" method="get" action="procesar.php">
+
+                    </form>
+                </section> 
+            </div>
+        </main>
+        <footer>
+            <section class="direccion">
+                <address>Vitoria, País Vasco</address>
+                <small>&copy; Derechos Reservados 2018</small>
+            </section>
+        </footer>
+    </body>
+</html>
