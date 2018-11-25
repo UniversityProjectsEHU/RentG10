@@ -1,78 +1,40 @@
-
-window.addEventListener('load', inicio, false);
-
-var correo,contra;
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+window.addEventListener("load", iniciar);
 var bd;
-function inicio() {
-    alert("estoy en inicio");
-    document.getElementById('botonlogin').addEventListener('click', guardar, false);
-    document.getElementById('cerrarsesion').addEventListener('click', borrardatos, false); 
-    /*Obtener datos almacenados */
-    var nombre = localStorage.getItem("Nombre");
-    /*Mostrar datos almacenados*/
-    var nombreusuario = localStorage.getItem("Nombre");
-    document.getElementById("nombree").innerHTML = nombreusuario;
-    //Validación en tiempo real
-    usuario=document.getElementById("email");
-    contra=document.getElementById("contrasena");
-    usuario.addEventListener("input",validacion);
-    contra.addEventListener("input",validacion);
-    validacion();
+var boton2;
+function iniciar() {
+    alert("ini");
+    cajadatos = document.getElementById("cajadatos");
+    var boton = document.getElementById("botonenviar");
+    boton.addEventListener("click", agregarobjeto);
+    
+
+
     var solicitud = indexedDB.open("basededatos");
+    solicitud.addEventListener("error", mostrarerror);
     solicitud.addEventListener("success", comenzar);
     solicitud.addEventListener("upgradeneeded", crearbd);
     
     boton2=document.getElementById("botonlogin");
     boton2.addEventListener("click",comprobar);
-    
+}
+function mostrarerror(){
+    alert("error");
+}
+function comenzar(evento){
+    alert("sacses");
+    bd=evento.target.result;
 }
 function comenzar(evento){
     alert("sacses");
     bd=evento.target.result;
 }
 
-
-function guardar(evt) {
-    localStorage.setItem("Nombre", document.getElementById('email').value);
-    /*Obtener datos almacenados*/
-    var nombre = localStorage.getItem("Nombre");
-    /*Mostrar datos almacenados*/
-    var nombreusuario = localStorage.getItem("Nombre");
-    document.getElementById("nombree").innerHTML = nombreusuario;
-}
-
-function borrardatos (evt) {
-    localStorage.clear();
-    /*Mostrar datos almacenados*/
-    var nombreusuario = localStorage.getItem("Nombre");
-    document.getElementById("nombree").innerHTML = nombreusuario;
-     location.href ="../html/pantallaInicial.html";
-}
-
-function validacion(){
-    if(usuario.value===""){
-        usuario.setCustomValidity("Inserte su nombre o su apellido");
-        usuario.style.background ="red" ;
-    }
-    else{
-        usuario.setCustomValidity("");
-        usuario.style.background = "green";
-    }
-    
-    if(contra.value===""){
-        contra.setCustomValidity("Inserte su contraseña");
-        contra.style.background="red";
-    }
-    else{
-        contra.setCustomValidity("");
-        contra.style.background = "green";
-    }
-    
-    
- 
-
-}
 function crearbd(evento) {
     alert("Estoy creando");
     bd=evento.target.result;
@@ -95,6 +57,22 @@ function crearbd(evento) {
     reservas.createIndex('by_fhf', 'fhf', {unique: false});
     reservas.createIndex('by_lugar', 'lugar', {unique: false});
 }
+
+function agregarobjeto() {
+    
+    alert("agrega");
+    var transaccion = bd.transaction(["clientes"], "readwrite");
+    var almacenclientes = transaccion.objectStore("clientes");
+    
+    var correo=document.getElementById("email").value;
+    var nom=document.getElementById("nombre").value;
+    var con=document.getElementById("contrasena").value;
+    var dnie=document.getElementById("dni").value;
+    var tel=document.getElementById("telefono").value;
+    
+    almacenclientes.add({correo:correo,nombre:nom,contra:con,dni:dnie,telefono:tel});
+}
+
 function comprobar(){
     alert("Etoi comprobando");
     var usuario,contraseña;
