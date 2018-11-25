@@ -6,7 +6,7 @@ var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedD
 var bd;
 function inicio() {
     alert("estoy en inicio");
-    document.getElementById('botonlogin').addEventListener('click', guardar, false);
+//    document.getElementById('botonlogin').addEventListener('click', guardar, false);
     document.getElementById('cerrarsesion').addEventListener('click', borrardatos, false); 
     /*Obtener datos almacenados */
     var nombre = localStorage.getItem("Nombre");
@@ -33,8 +33,8 @@ function comenzar(evento){
 }
 
 
-function guardar(evt) {
-    localStorage.setItem("Nombre", document.getElementById('email').value);
+function guardar(nomb) {
+    localStorage.setItem("Nombre", nomb);
     /*Obtener datos almacenados*/
     var nombre = localStorage.getItem("Nombre");
     /*Mostrar datos almacenados*/
@@ -113,11 +113,13 @@ function comprueba(event){
            alert("Bien");
             if(puntero.value.contra.toString()===document.getElementById('contrasena').value){
                 alert("Contra tambien bien");
+                guardar(puntero.value.nombre.toString());
             }
         }
         else{
             location.href ="../html/pantallaInicial.html";
         }
        
-    }
+    } 
+    puntero.continue();
 }
