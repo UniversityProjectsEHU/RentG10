@@ -98,28 +98,26 @@ function crearbd(evento) {
 function comprobar(){
     alert("Etoi comprobando");
     var usuario,contraseña;
-    usuario=document.getElementById("email").value;
+    usuario=document.getElementById('email').value;
     contraseña=document.getElementById("contrasena").value;
-    
-var transaction = bd.transaction(["clientes"]);
-var objectStore = transaction.objectStore("clientes");
-var request = objectStore.get(usuario);
-request.onerror = function() {
-  // Handle errors!
-  boton2.setCustomValidity("Email incorrecto");
-};
-request.onsuccess = function() {
-  // Do something with the request.result!
-  request.objectStore.get(contraseña);
-  
-  request.onerror = function() {
-  // Handle errors!
-  boton2.setCustomValidity("Contraseña incorrecta incorrecto");
-};
-request.onsuccess = function() {
-  // Do something with the request.result!
-alert("eeeei");
-};
-
-};
+    var transaccion=bd.transaction(["clientes"]);
+    var almacenclientes=transaccion.objectStore("clientes");
+    var puntero=almacenclientes.openCursor();
+    puntero.addEventListener("success",comprueba);
+}
+function comprueba(event){
+    alert("comprueba");
+    var puntero=event.target.result;
+    if(puntero){
+        if(puntero.value.correo.toString()===document.getElementById('email').value){
+           alert("Bien");
+            if(puntero.value.contra.toString()===document.getElementById('contrasena').value){
+                alert("Contra tambien bien");
+            }
+        }
+        else{
+            location.href ="../html/pantallaInicial.html";
+        }
+       
+    }
 }
