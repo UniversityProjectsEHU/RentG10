@@ -3,7 +3,7 @@
         <title>RentG - Consulta Reservas</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="../css/cssConsultaUsuario.css">
-        <script src="../javascript/jsReservar.js"></script>
+        <script src="../javascript/jsConsultaUsuario.js"></script>
     </head>
     <body>
         <header id="cabecera">
@@ -33,11 +33,15 @@
                     <img src="../imagenes/consulta.png" id="imgtitulo">
                     <form id="formconsulta" method="get" action="procesar.php">
                         <p>Fecha: <input type="date" name="fecha" id="fecha" />
-                    <p><br/></p>
-                    <p><input id="botonenviar" type="submit" value="Enviar" />
+                        <p><br/></p>
+                        <p><input id="botonenviar" type="button" value="Enviar" />
                     </form>
                 </section> 
                 <p><br/></p>
+                <section id="cajadatos">
+                    <p>Información:</p>
+                </section>
+                <input id="botonmostrar" type="button" value="Mostrar" />
                 <img src="../imagenes/banner.PNG" id="banner">
             </div>
         </main>

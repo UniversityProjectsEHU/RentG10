@@ -84,7 +84,24 @@ main {
     margin:10px auto; /*CENTRA LA IMAGEN*/
     display:block;
 }
-
+#imgfecha{
+    width:423px; 
+    height:62px; 
+    margin:10px auto; /*CENTRA LA IMAGEN*/
+    display:block;
+}
+#imgemail{
+    width:423px; 
+    height:62px; 
+    margin:10px auto; /*CENTRA LA IMAGEN*/
+    display:block;
+}
+#imgmatricula{
+    width:423px; 
+    height:62px; 
+    margin:10px auto; /*CENTRA LA IMAGEN*/
+    display:block;
+}
 footer{
     background-color: #0F76A0; 
     text-align:center
