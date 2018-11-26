@@ -33,8 +33,9 @@ function comenzar(evento){
 }
 
 
-function guardar(nomb) {
+function guardar(nomb,ema) {
     localStorage.setItem("Nombre", nomb);
+    localStorage.setItem("Email", ema);
     /*Obtener datos almacenados*/
     var nombre = localStorage.getItem("Nombre");
     /*Mostrar datos almacenados*/
@@ -113,11 +114,12 @@ function comprueba(event){
            alert("Bien");
             if(puntero.value.contra.toString()===document.getElementById('contrasena').value){
                 alert("Contra tambien bien");
-                guardar(puntero.value.nombre.toString());
+                guardar(puntero.value.nombre.toString(),document.getElementById('email').value.toString());
+                alert("Estas Logeado");
             }
         }
         else{
-            location.href ="../html/pantallaInicial.html";
+            alert("Lo sentimos tu usuario y contraseña no coinciden");
         }
        
     } 
