@@ -34,11 +34,11 @@
                     <form name="formreserva" id="formreserva" method="get" action="procesar.php">
                         <p>Coche:
                             <datalist id="coches">
-                                <option value="Vitoria-Gasteiz" label="Coche 1">
-                                <option value="Bilbao" label="Coche 2">                                
-                                <option value="Donostia" label="Coche 3">
+                                <option value="abc-789" label="Mercedes">
+                                <option value="abc-123" label="Fiat">                                
+                                <option value="cba-547" label="Jaguar">
                             </datalist>
-                            <input name="coches" id="coches" list="coches" placeholder="Elige un coche..." />
+                            <input name="coches" id="cochesin" list="coches" placeholder="Elige un coche..." />
                         <p><br/></p>
                         <p>Fecha de salida:<input type="date" name="fechasalida" id="fechasalida" />
                         <p><br/></p>
@@ -56,7 +56,7 @@
                             </datalist>
                             <input name="lugares" id="lugares" list="lugar" placeholder="Elige un lugar..." />
                         <p><br/></p>
-                        <p><input id="botonenviar" type="submit" value="Enviar" />
+                        <p><input id="botonenviar" type="button" value="Enviar" />
                     </form>
                 </section>
             </div>

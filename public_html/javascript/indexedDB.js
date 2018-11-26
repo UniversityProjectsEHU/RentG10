@@ -62,8 +62,10 @@ function crearbd(evento) {
    var reservas= basededatos.createObjectStore("reservas",{keyPath:"id"});
     reservas.createIndex('by_Matricula', 'matricula', {unique: true});
     reservas.createIndex('by_correo', 'correo', {unique: true});
-    reservas.createIndex('by_fhi', 'fhi', {unique: false});
-    reservas.createIndex('by_fhf', 'fhf', {unique: false});
+    reservas.createIndex('by_fi', 'fi', {unique: false});
+    reservas.createIndex('by_hi', 'hi', {unique: false});
+    reservas.createIndex('by_ff', 'ff', {unique: false});
+    reservas.createIndex('by_hf', 'hf', {unique: false});
     reservas.createIndex('by_lugar', 'lugar', {unique: false});
     
     
@@ -83,18 +85,3 @@ function agregarobjeto() {
     almacenclientes.add({correo:correo,nombre:nom,contra:con,dni:dnie,telefono:tel});
 }
 
-
-function crea(){
-   var transaccion = bd.transaction(["clientes"], "readwrite");
-   alert("transaction");
-   var clientes= transaccion.objectStore("clientes");
-   alert("objectstore");
-   clientes.add({correo:"admin@gmail.com",nombre:"admin1",contra:"admin",dni:"123456789",telefono:"111222333"});
-//           alert("admin");
-//            var transaccionco = bd.transaction(["coches"], "readwrite");
-//   var coches = transaccionco.objectStore("coches");
-//   coches.add({matricula:"abc-789",marca:"Mercedes",caracteristica:"mediano"},
-//              {matricula:"abc-123",marca:"Fiat",caracteristica:"grande"},
-//              {matricula:"cba-547",marca:"Jaguar",caracteristica:"pequeño"}
-//           );
-}

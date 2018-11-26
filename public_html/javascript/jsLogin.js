@@ -105,23 +105,25 @@ function comprobar(){
     var almacenclientes=transaccion.objectStore("clientes");
     var puntero=almacenclientes.openCursor();
     puntero.addEventListener("success",comprueba);
+    
 }
 function comprueba(event){
     alert("comprueba");
     var puntero=event.target.result;
+    var notfound=true;
     if(puntero){
         if(puntero.value.correo.toString()===document.getElementById('email').value){
            alert("Bien");
             if(puntero.value.contra.toString()===document.getElementById('contrasena').value){
                 alert("Contra tambien bien");
+                
                 guardar(puntero.value.nombre.toString(),document.getElementById('email').value.toString());
                 alert("Estas Logeado");
             }
         }
-        else{
-            alert("Lo sentimos tu usuario y contraseña no coinciden");
-        }
+       
        
     } 
+  
     puntero.continue();
 }
