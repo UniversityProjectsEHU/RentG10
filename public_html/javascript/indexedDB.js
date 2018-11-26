@@ -7,6 +7,7 @@ var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedD
 window.addEventListener("load", iniciar);
 var bd;
 var boton2;
+
 function iniciar() {
     alert("ini");
     cajadatos = document.getElementById("cajadatos");
@@ -20,19 +21,20 @@ function iniciar() {
     solicitud.addEventListener("success", comenzar);
     solicitud.addEventListener("upgradeneeded", crearbd);
     
-    boton2=document.getElementById("botonlogin");
-    boton2.addEventListener("click",comprobar);
+    
+    
+//    var botoncre=document.getElementById("botoncrear");
+//    botoncre.addEventListener("click",crea);
+    
 }
 function mostrarerror(){
     alert("error");
 }
+
 function comenzar(evento){
     alert("sacses");
     bd=evento.target.result;
-}
-function comenzar(evento){
-    alert("sacses");
-    bd=evento.target.result;
+    
 }
 
 function crearbd(evento) {
@@ -44,11 +46,18 @@ function crearbd(evento) {
     clientes.createIndex('by_contra', 'contra', {unique: false});
     clientes.createIndex('by_DNI', 'dni', {unique: true});
     clientes.createIndex('by_tel', 'telefono', {unique: true});
-
+    clientes.add({correo:"admin@gmail.com",nombre:"admin1",contra:"admin",dni:"123456789",telefono:"111222333"});
+    clientes.add({correo:"admin2@gmail.com",nombre:"admin2",contra:"admin2",dni:"123456787",telefono:"111222334"});
+    
+   
 
    var coches= basededatos.createObjectStore("coches",{keyPath:"matricula"});
    coches.createIndex('by_Marca', 'marca', {unique: false});
    coches.createIndex('by_caract', 'caracteristica', {unique: false});
+   coches.add({matricula:"abc-789",marca:"Mercedes",caracteristica:"mediano"});
+   coches.add({matricula:"abc-123",marca:"Fiat",caracteristica:"grande"});
+   coches.add({matricula:"cba-547",marca:"Jaguar",caracteristica:"pequeño"});
+   
 
    var reservas= basededatos.createObjectStore("reservas",{keyPath:"id"});
     reservas.createIndex('by_Matricula', 'matricula', {unique: true});
@@ -56,10 +65,11 @@ function crearbd(evento) {
     reservas.createIndex('by_fhi', 'fhi', {unique: false});
     reservas.createIndex('by_fhf', 'fhf', {unique: false});
     reservas.createIndex('by_lugar', 'lugar', {unique: false});
+    
+    
 }
 
 function agregarobjeto() {
-    
     alert("agrega");
     var transaccion = bd.transaction(["clientes"], "readwrite");
     var almacenclientes = transaccion.objectStore("clientes");
@@ -73,31 +83,18 @@ function agregarobjeto() {
     almacenclientes.add({correo:correo,nombre:nom,contra:con,dni:dnie,telefono:tel});
 }
 
-function comprobar(){
-    alert("Etoi comprobando");
-    var usuario,contraseña;
-    usuario=document.getElementById("email").value;
-    contraseña=document.getElementById("contrasena").value;
-    
-var transaction = bd.transaction(["clientes"]);
-var objectStore = transaction.objectStore("clientes");
-var request = objectStore.get(usuario);
-request.onerror = function() {
-  // Handle errors!
-  boton2.setCustomValidity("Email incorrecto");
-};
-request.onsuccess = function() {
-  // Do something with the request.result!
-  request.objectStore.get(contraseña);
-  
-  request.onerror = function() {
-  // Handle errors!
-  boton2.setCustomValidity("Contraseña incorrecta incorrecto");
-};
-request.onsuccess = function() {
-  // Do something with the request.result!
-alert("eeeei");
-};
 
-};
+function crea(){
+   var transaccion = bd.transaction(["clientes"], "readwrite");
+   alert("transaction");
+   var clientes= transaccion.objectStore("clientes");
+   alert("objectstore");
+   clientes.add({correo:"admin@gmail.com",nombre:"admin1",contra:"admin",dni:"123456789",telefono:"111222333"});
+//           alert("admin");
+//            var transaccionco = bd.transaction(["coches"], "readwrite");
+//   var coches = transaccionco.objectStore("coches");
+//   coches.add({matricula:"abc-789",marca:"Mercedes",caracteristica:"mediano"},
+//              {matricula:"abc-123",marca:"Fiat",caracteristica:"grande"},
+//              {matricula:"cba-547",marca:"Jaguar",caracteristica:"pequeño"}
+//           );
 }

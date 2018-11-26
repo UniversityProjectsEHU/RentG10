@@ -68,5 +68,5 @@ function mostrar(evento) {
     var resultado = evento.target.result;
     cajadatos.innerHTML += '<img src="' + resultado + '">';
 } 
-s
+
 
