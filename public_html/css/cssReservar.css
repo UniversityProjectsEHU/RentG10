@@ -22,16 +22,16 @@
     color: black;
 }
 #imglogo{
-       width:125px;
-       height:125px; 
-       position: absolute;
-       top:  10px; 
-       left: 10px;
+    width:125px;
+    height:125px; 
+    position: absolute;
+    top:  10px; 
+    left: 10px;
 } 
 #imgsilueta{
-       position: absolute; 
-       left: 800px;
-       top: 3px;
+    position: absolute; 
+    left: 800px;
+    top: 3px;
 } 
 
 
@@ -71,15 +71,38 @@ main {
     display:block;
 }
 #formreserva{
-   margin: 10px;
-   margin-left: 500px;
+    margin: 10px;
+    margin-left: 500px;
 }
 #botonenviar{
     margin-left: 80px;
 }
+#imagenescoches{
+    margin:10px auto; /*CENTRA LA IMAGEN*/
+    display:block;
+}
+#imgcoche1{
+    width:216px; 
+    height:216px; 
+    margin:10px auto; /*CENTRA LA IMAGEN*/
+    display:block;
+}
+#imgcoche2{
+    width:216px; 
+    height:216px; 
+    margin:10px auto; /*CENTRA LA IMAGEN*/
+    display:block;
+}
+#imgcoche3{
+    width:216px; 
+    height:216px; 
+    margin:10px auto; /*CENTRA LA IMAGEN*/
+    display:block;
+}
+
 
 footer{
-     background-color: #0F76A0; 
-     text-align:center
+    background-color: #0F76A0; 
+    text-align:center
 }
 
