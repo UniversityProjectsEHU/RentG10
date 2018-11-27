@@ -1,9 +1,9 @@
 <html lang="es">
     <head>
-        <title>RentG - Consulta Reservas</title>
+        <title>RentG - Consulta Reservas Admin por fecha</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="../css/cssConsultaUsuario.css">
-        <script src="../javascript/jsConsultaUsuario.js"></script>
+        <script src="../javascript/jsAdminporCliente.js"></script>
     </head>
     <body>
         <header id="cabecera">
@@ -30,9 +30,9 @@
                     HOLA,
                     <label id="nombree"></label>
                     <input id="cerrarsesion" type="button" value="Cerrar Sesion" />
-                    <img src="../imagenes/consulta.png" id="imgtitulo">
+                    <img src="../imagenes/admin.PNG" id="imgtitulo">
                     <form id="formconsulta" method="get" action="procesar.php">
-                        <p>Fecha: <input type="date" name="fecha" id="fecha" />
+                        <p>Email: <input type="email" name="emailcliente" id="emailcliente" />
                         <p><br/></p>
                         <p><input id="botonenviar" type="button" value="Enviar" />
                     </form>
@@ -41,7 +41,6 @@
                 <section id="cajadatos">
                     <p>Información:</p>
                 </section>
-                <img src="../imagenes/banner.PNG" id="banner">
             </div>
         </main>
         <footer>

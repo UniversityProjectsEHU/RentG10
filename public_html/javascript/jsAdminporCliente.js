@@ -81,7 +81,7 @@ function comprueba(event) {
     alert("comprueba");
     var puntero = event.target.result;
     if (puntero) {
-        if (puntero.value.correo.toString() === document.getElementById('email').value) {
+        if (puntero.value.correo === document.getElementById('email').value) {
             alert("Bien");
             if (puntero.value.contra.toString() === document.getElementById('contrasena').value) {
                 alert("Contra tambien bien");
@@ -99,28 +99,17 @@ function comprueba(event) {
 function mostrarlista(evento) {
     alert("Estoy en mostrar lista");
     var puntero = evento.target.result;
-    var fechaapuntada = document.getElementById("fecha").value;
-    var fechaformulario = new Date(fechaapuntada);
-    
-    
-    var fechabase = puntero.value.fi;
-    var fechasin = fechabase.split("-");
-    var fechafinal = fechasin[0]+","+fechasin[1]+","+fechasin[2];
-    var d = new Date(fechafinal);
-    alert(fechaformulario.getTime() + "ESTA ES LA DEL FOR");
-    alert(d.getTime() + "ESTA ES LA DE BD");
- 
     if (puntero) {
-        if (puntero.value.correo === localStorage.getItem("Email")) {
-             alert("entro1");
-            if (d.getTime()>fechaformulario.getTime()){
-                alert("entro2");
-                document.getElementById('cajadatos').innerHTML += "<div>" + puntero.value.id + 
-                        " / " + puntero.value.matricula + " / " + puntero.value.correo + 
-                        " / " + puntero.value.fi + " / " + puntero.value.hi +
-                        " / " + puntero.value.ff + " / " + puntero.value.hf +
-                        " / " + puntero.value.lugar +"</div>";
-            }
+        alert(puntero.value.correo + "ESTA PUENTRO");
+        alert(document.getElementById("emailcliente").value+"ESTE HTML");
+        if (puntero.value.correo === document.getElementById("emailcliente").value) {
+            alert("entro1");
+
+            document.getElementById('cajadatos').innerHTML += "<div>" + puntero.value.id +
+                    " / " + puntero.value.matricula + " / " + puntero.value.correo +
+                    " / " + puntero.value.fi + " / " + puntero.value.hi +
+                    " / " + puntero.value.ff + " / " + puntero.value.hf +
+                    " / " + puntero.value.lugar + "</div>";
         }
         puntero.continue();
     }
@@ -139,3 +128,6 @@ function compareDates(date1, date2) {
     }
     return 0;
 }
+
+
+

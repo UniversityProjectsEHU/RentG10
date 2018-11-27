@@ -111,8 +111,6 @@ function mostrarlista(evento) {
     alert(d.getTime() + "ESTA ES LA DE BD");
  
     if (puntero) {
-        if (puntero.value.correo === localStorage.getItem("Email")) {
-             alert("entro1");
             if (d.getTime()>fechaformulario.getTime()){
                 alert("entro2");
                 document.getElementById('cajadatos').innerHTML += "<div>" + puntero.value.id + 
@@ -121,7 +119,7 @@ function mostrarlista(evento) {
                         " / " + puntero.value.ff + " / " + puntero.value.hf +
                         " / " + puntero.value.lugar +"</div>";
             }
-        }
+        
         puntero.continue();
     }
 }
@@ -139,3 +137,6 @@ function compareDates(date1, date2) {
     }
     return 0;
 }
+
+
+
