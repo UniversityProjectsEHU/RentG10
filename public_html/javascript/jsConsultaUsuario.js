@@ -10,9 +10,9 @@ function inicio() {
 //    document.getElementById('botonlogin').addEventListener('click', guardar, false);
     document.getElementById('cerrarsesion').addEventListener('click', borrardatos, false);
     /*Obtener datos almacenados */
-    var nombre = localStorage.getItem("Nombre");
+    var nombre = sessionStorage.getItem("Nombre");
     /*Mostrar datos almacenados*/
-    var nombreusuario = localStorage.getItem("Nombre");
+    var nombreusuario = sessionStorage.getItem("Nombre");
     document.getElementById("nombree").innerHTML = nombreusuario;
 
     var solicitud = indexedDB.open("basededatos");
@@ -29,9 +29,9 @@ function comenzar(evento) {
 }
 
 function borrardatos(evt) {
-    localStorage.clear();
+    sessionStorage.clear();
     /*Mostrar datos almacenados*/
-    var nombreusuario = localStorage.getItem("Nombre");
+    var nombreusuario = sessionStorage.getItem("Nombre");
     document.getElementById("nombree").innerHTML = nombreusuario;
     location.href = "../html/pantallaInicial.html";
 }
@@ -111,7 +111,7 @@ function mostrarlista(evento) {
     alert(d.getTime() + "ESTA ES LA DE BD");
  
     if (puntero) {
-        if (puntero.value.correo === localStorage.getItem("Email")) {
+        if (puntero.value.correo === sessionStorage.getItem("Email")) {
              alert("entro1");
             if (d.getTime()>fechaformulario.getTime()){
                 alert("entro2");

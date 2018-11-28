@@ -3,14 +3,14 @@ var puede;
 function inicio() {
     document.getElementById('cerrarsesion').addEventListener('click', borrardatos, false);
     /*Obtener datos almacenados */
-    var nombre = localStorage.getItem("Nombre");
+    var nombre = sessionStorage.getItem("Nombre");
     /*Mostrar datos almacenados*/
-    var nombreusuario1 = localStorage.getItem("Nombre");
-    var nombreusuario = localStorage.getItem("Nombre").toString();
-    var emailusuario = localStorage.getItem("Email").toString();
+    var nombreusuario1 = sessionStorage.getItem("Nombre");
+    var nombreusuario = sessionStorage.getItem("Nombre").toString();
+    var emailusuario = sessionStorage.getItem("Email").toString();
     document.getElementById("nombree").innerHTML = nombreusuario1;
 
-//    if ( localStorage.getItem("Nombre") === null) {
+//    if ( sessionStorage.getItem("Nombre") === null) {
 //        location.href = "../html/pantallaInicial.html";
 //    }
     puede = false;
@@ -27,9 +27,9 @@ function inicio() {
 
 //Cierra la sesion y te manda a la pantalla inicial
 function borrardatos(evt) {
-    localStorage.clear();
+    sessionStorage.clear();
     /*Mostrar datos almacenados*/
-    var nombreusuario = localStorage.getItem("Nombre");
+    var nombreusuario = sessionStorage.getItem("Nombre");
     document.getElementById("nombree").innerHTML = nombreusuario;
     location.href = "../html/pantallaInicial.html";
 }

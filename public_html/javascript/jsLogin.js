@@ -9,9 +9,9 @@ function inicio() {
 //    document.getElementById('botonlogin').addEventListener('click', guardar, false);
     document.getElementById('cerrarsesion').addEventListener('click', borrardatos, false); 
     /*Obtener datos almacenados */
-    var nombre = localStorage.getItem("Nombre");
+    var nombre = sessionStorage.getItem("Nombre");
     /*Mostrar datos almacenados*/
-    var nombreusuario = localStorage.getItem("Nombre");
+    var nombreusuario = sessionStorage.getItem("Nombre");
     document.getElementById("nombree").innerHTML = nombreusuario;
     //Validación en tiempo real
     usuario=document.getElementById("email");
@@ -34,19 +34,19 @@ function comenzar(evento){
 
 
 function guardar(nomb,ema) {
-    localStorage.setItem("Nombre", nomb);
-    localStorage.setItem("Email", ema);
+    sessionStorage.setItem("Nombre", nomb);
+    sessionStorage.setItem("Email", ema);
     /*Obtener datos almacenados*/
-    var nombre = localStorage.getItem("Nombre");
+    var nombre = sessionStorage.getItem("Nombre");
     /*Mostrar datos almacenados*/
-    var nombreusuario = localStorage.getItem("Nombre");
+    var nombreusuario = sessionStorage.getItem("Nombre");
     document.getElementById("nombree").innerHTML = nombreusuario;
 }
 
 function borrardatos (evt) {
-    localStorage.clear();
+    sessionStorage.clear();
     /*Mostrar datos almacenados*/
-    var nombreusuario = localStorage.getItem("Nombre");
+    var nombreusuario = sessionStorage.getItem("Nombre");
     document.getElementById("nombree").innerHTML = nombreusuario;
      location.href ="../html/pantallaInicial.html";
 }

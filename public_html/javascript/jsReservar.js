@@ -5,9 +5,9 @@ function inicio() {
     alert("estoy en inicio");
     document.getElementById('cerrarsesion').addEventListener('click', borrardatos, false);
     /*Obtener datos almacenados */
-    var nombre = localStorage.getItem("Nombre");
+    var nombre = sessionStorage.getItem("Nombre");
     /*Mostrar datos almacenados*/
-    var nombreusuario = localStorage.getItem("Nombre");
+    var nombreusuario = sessionStorage.getItem("Nombre");
     document.getElementById("nombree").innerHTML = nombreusuario;
 
     var solicitud = indexedDB.open("basededatos");
@@ -68,7 +68,7 @@ function addreserva() {
     var fechallegada = document.getElementById("fechallegada").value;
     var horallegada = document.getElementById("horallegada").value;
     var lugar = document.getElementById("lugares").value;
-    var correo = localStorage.getItem("Email");
+    var correo = sessionStorage.getItem("Email");
 
     alert("datos recogidos");
 
@@ -95,9 +95,9 @@ function addreserva() {
     }
 }
 function borrardatos(evt) {
-    localStorage.clear();
+    sessionStorage.clear();
     /*Mostrar datos almacenados*/
-    var nombreusuario = localStorage.getItem("Nombre");
+    var nombreusuario = sessionStorage.getItem("Nombre");
     document.getElementById("nombree").innerHTML = nombreusuario;
     location.href = "../html/pantallaInicial.html";
 }
