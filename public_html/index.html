@@ -1,16 +1,65 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor. Esto es un cambio
--->
-<html>
+<html lang="es">
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>RentG</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/cssPantallaPrincipal.css">
+        <script src="javascript/jsPantallaInicial.js"></script>
     </head>
     <body>
-        <div>TODO write content</div>
+        <header id="cabecera">
+            <div>
+                <h1>RentG</h1>
+                <h2>La plataforma de alquiler de coches lider en el Pais Vasco</h2>
+                <a href="pantallaInicial.html"><img src="imagenes/logpng.png" id="imglogo"></a>
+                <img src="imagenes/silueta.png" id="imgsilueta">
+            </div>
+        </header>
+        <nav id="menuprincipal">
+            <div>
+                <ul>
+                    <li><a href="html/pantallaLogin.html">Login</a></li>
+                    <li><a href="html/pantallaReservar.html">Reservar</a></li>
+                    <li><a href="html/pantallaConsultaUsuario.html">Consultar Reservas</a></li>
+                    <li><a href="">Contacto</a></li>
+                </ul>
+            </div>
+        </nav>
+        <main>
+            <div>
+                <section id="busqueda">
+                    HOLA,
+                    <label id="nombree"></label>
+                    <input id="cerrarsesion" type="button" value="Cerrar Sesion" />
+                    <img src="imagenes/buscar.png" id="imgtitulo">
+                    <form id="miformulario" method="get" action="procesar.php">
+                        <p>Lugar:
+                            <datalist id="lugar">
+                                <option value="Vitoria-Gasteiz" label="Lugar 1">
+                                <option value="Bilbao" label="Lugar 2">                                
+                                <option value="Donostia" label="Lugar 3">
+                            </datalist>
+                            <input name="lugares" id="lugares" list="lugar" placeholder="Elige un lugar..." />
+                        <p><br/></p>
+                        <p>Fecha de salida:<input type="date" name="fechasalida" id="fechasalida" />
+                        <p><br/></p>
+                        <p>Hora de salida:<input type="time" name="horasalida" id="horasalida" />
+                        <p><br/></p>
+                        <p>Fecha de llegada:<input type="date" name="fechallegada" id="fechallegada" />
+                        <p><br/></p>
+                        <p>Hora de llegada:<input type="time" name="horallegada" id="horallegada" />
+                        <p><br/></p>
+                        <p><input id="botonenviar" type="submit" value="Enviar" />
+                    </form>
+                </section>
+                <p><br/></p>
+                <a href="pantallaConsultaAdmin.html"><img src="imagenes/admin.PNG" id="imgadmin"></a>
+            </div>
+        </main>
+        <footer>
+            <section class="direccion">
+                <address>Vitoria, País Vasco</address>
+                <small>&copy; Derechos Reservados 2018</small>
+            </section>
+        </footer>
     </body>
 </html>

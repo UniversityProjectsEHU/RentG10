@@ -113,7 +113,7 @@ function mostrarlista(evento) {
     if (puntero) {
         if (puntero.value.correo === sessionStorage.getItem("Email")) {
              alert("entro1");
-            if (d.getTime()>fechaformulario.getTime()){
+            if (d.getTime()>=fechaformulario.getTime()){
                 alert("entro2");
                 document.getElementById('cajadatos').innerHTML += "<div>" + puntero.value.id + 
                         " / " + puntero.value.matricula + " / " + puntero.value.correo + 
