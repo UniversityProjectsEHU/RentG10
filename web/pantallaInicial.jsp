@@ -42,6 +42,7 @@
                         }
                         %>
                         <label id="nombree"><%=elnombre%></label>
+                        
                     <form name="formcerrarsesion" action="cerrarsesion" id="formcerrarsesion" method="get">
                         <input id="cerrarsesion" type="submit" value="Cerrar Sesion" /> 
                     </form> 
