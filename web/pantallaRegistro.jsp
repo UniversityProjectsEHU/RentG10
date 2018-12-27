@@ -21,16 +21,16 @@
             <div>
                 <h1>RentG</h1>
                 <h2>La plataforma de alquiler de coches lider en el Pais Vasco</h2>
-                <a href="pantallaInicial.html"><img src="imagenes/logpng.png" id="imglogo"></a>
+                <a href="pantallaInicial.jsp"><img src="imagenes/logpng.png" id="imglogo"></a>
                 <img src="imagenes/silueta.png" id="imgsilueta">
             </div>
         </header>
         <nav id="menuprincipal">
             <div>
                 <ul>
-                    <li><a href="pantallaLogin.html">Login</a></li>
-                    <li><a href="pantallaReservar.html">Reservar</a></li>
-                    <li><a href="pantallaConsultaUsuario.html">Consultar Reservas</a></li>
+                    <li><a href="pantallaLogin.jsp">Login</a></li>
+                    <li><a href="pantallaReservar.jsp">Reservar</a></li>
+                    <li><a href="pantallaConsultaUsuario.jsp">Consultar Reservas</a></li>
                     <li><a href="">Contacto</a></li>
                 </ul>
             </div>
@@ -39,7 +39,7 @@
             <div>
                 <section id="registro">
                     <img src="imagenes/registro.png" id="imgtitulo">
-                    <form name="formRegistro" id="formRegistro" method="get" action="controladorRegistro">
+                    <form name="formRegistro" id="formRegistro" method="post" action="controladorRegistro" enctype="multipart/form-data">
                         <p>Email: <input type="email" name="email" id="email" required="" />
                         <p><br/></p>
                         <p>Contraseña: <input type="password" name="contrasena" id="contrasena" required="" />
@@ -51,7 +51,7 @@
                         <p>Telefono:<input type="tel" name="telefono" id="telefono"/> 
                         <p><br/></p>
                         <label for="archivos">Imagen: </label>
-                        <input type="file" name="archivos" id="archivos">
+                        <input type="file" name="archivos" id="archivos" required="">
                         <p><br/></p>
                         <section id="cajadatos">
                             <p>Seleccione un archivo</p>
