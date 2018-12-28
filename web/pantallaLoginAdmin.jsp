@@ -4,6 +4,10 @@
     Author     : serna
 --%>
 
+<%@page import="utils.BD"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -36,26 +40,55 @@
         </nav>
         <main>
             <div>
-                
-                    HOLA,
-                    <% String elnombre=(String)session.getAttribute("nombrelogin"); 
-                        if(elnombre==null){
-                            elnombre="No esta logueado";
-                        }
-                        %>
-                        <label id="nombree"><%=elnombre%></label>
-                        <form name="formcerrarsesion" action="cerrarsesion" id="formcerrarsesion" method="get">
-                        <input id="cerrarsesion" type="submit" value="Cerrar Sesion" /> 
-                        </form> 
-                        <img src="imagenes/loginAdmin.PNG" id="imgtitulo">
-                    <form name="formLogin" action="controladorLoginAdmin" id="formLogin" method="get">
-                        <p>Email: <input type="email" name="email" id="email" required="" />
-                        <p><br/></p>
-                        <p>Contraseña: <input type="password" name="contrasena" id="contrasena" required="" />
-                        <p><br/></p>
-                        <p><input id="botonlogin" type="submit" value="Login" />
-                    </form> 
-                
+
+                HOLA,
+                <% String elnombre = (String) session.getAttribute("nombrelogin");
+                    String path;
+                    if (elnombre == null) {
+                        elnombre = "No esta logueado";
+                %>
+                <label id="nombree"><%=elnombre%></label>
+
+                <%
+
+                } 
+                else if (elnombre == "Alfonso" || elnombre == "Antonia") {
+                %>
+                <label id="nombree"><%=elnombre%></label>
+                <img id="fotolog" src=imagenes/admin.PNG </img>
+                <%
+                } 
+else if (elnombre.equals("Antonia")) {
+                %>
+                <label id="nombree"><%=elnombre%></label>
+                <img id="fotolog" src=imagenes/adminmujfoto.jpg</img>
+                <%
+                }else {
+                    System.out.println(elnombre);
+                    Connection con = BD.getConexion();
+                    Statement st = con.createStatement();
+                    ResultSet rs = st.executeQuery("select path from clientes where nombre='" + elnombre + "'");
+                    rs.next();
+                    path = "imagenes/" + rs.getString(1);
+
+                %>
+                <label id="nombree"><%=elnombre%></label>
+                <img id="fotolog" src=<%=path%> </img>
+
+
+                <% }%>
+                <form name="formcerrarsesion" action="cerrarsesion" id="formcerrarsesion" method="get">
+                    <input id="cerrarsesion" type="submit" value="Cerrar Sesion" /> 
+                </form> 
+                <img src="imagenes/loginAdmin.PNG" id="imgtitulo">
+                <form name="formLogin" action="controladorLoginAdmin" id="formLogin" method="get">
+                    <p>Email: <input type="email" name="email" id="email" required="" />
+                    <p><br/></p>
+                    <p>Contraseña: <input type="password" name="contrasena" id="contrasena" required="" />
+                    <p><br/></p>
+                    <p><input id="botonlogin" type="submit" value="Login" />
+                </form> 
+
             </div>
             <p><br/></p>
         </main>

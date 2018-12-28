@@ -313,44 +313,48 @@ public class controladorRegistro extends HttpServlet {
             while (itr.hasNext()) {
                 FileItem uploaded = (FileItem) itr.next();
                 if (!uploaded.isFormField()) {
-                    
+
                     hayFoto = true;
                     //Funciona con direcciones absolutas
-                    file = new File("C:\\Users\\Sergio\\Downloads\\RentG10-Sprint2\\web\\img\\" + id + ".png");
+                    file = new File("C:\\Users\\Sergio\\Documents\\NetBeansProjects\\Sprint2\\RentG10\\web\\imagenes\\" + id + ".png");
                     //No funciona con relativas
-                    //file = new File("img/"+id+".png");
+                    //file = new File("imagenes/"+id+".png");
 
                     uploaded.write(file);
                     System.out.println(file);
                 } else {
                     String correo = uploaded.getString();
                     String field = uploaded.getFieldName();
-                    if ("dni".equals(field)&&correo==null) {
-                        hayDNI = true;
-                    } else if ("telefono".equals(field)&&correo==null) {
-                        hayTele = true;
-                    }
+
                     System.out.println(correo);
                     a.add(correo);
 
                 }
             }
+            hayDNI = false;
+            hayTele = false;
+            System.out.println(a.get(3).toString());
+            System.out.println(a.get(4).toString());
+
+            if (!"".equals(a.get(3).toString())) {
+                hayDNI = true;
+            }
+            if (!"".equals(a.get(4).toString())) {
+                hayTele = true;
+            }
             if (hayDNI && hayTele) {
+                System.out.println("1");
                 set.executeUpdate("INSERT INTO clientes VALUES ('" + a.get(0) + "','" + a.get(1) + "','" + a.get(2) + "','" + a.get(3) + "','" + a.get(4) + "','" + id + ".png');");
-            } 
-            else if (!hayDNI && hayTele) {
-                set.executeUpdate("INSERT INTO clientes(email,contrasena,nombre,movil,path) VALUES ('" + a.get(0) + "','" + a.get(1) + "','" + a.get(2) + "','" +a.get(3)+"','"+ id+".png');");
+            } else if (!hayDNI && hayTele) {
+                System.out.println("2");
+                set.executeUpdate("INSERT INTO clientes(email,contrasena,nombre,movil,path) VALUES ('" + a.get(0) + "','" + a.get(1) + "','" + a.get(2) + "','" + a.get(4) + "','" + id + ".png');");
+            } else if (hayDNI && !hayTele) {
+                System.out.println("3");
+                set.executeUpdate("INSERT INTO clientes(email,contrasena,nombre,dni,path) VALUES ('" + a.get(0) + "','" + a.get(1) + "','" + a.get(2) + "','" + a.get(3) + "','" + id + ".png');");
+            } else if (!hayDNI && !hayTele) {
+                System.out.println("4");
+                set.executeUpdate("INSERT INTO clientes(email,contrasena,nombre,path) VALUES ('" + a.get(0) + "','" + a.get(1) + "','" + a.get(2) + "','" + id + ".png');");
             }
-            else if (  hayDNI && !hayTele) {
-                System.out.println("AAAA");
-                set.executeUpdate("INSERT INTO clientes(email,contrasena,nombre,dni,path) VALUES ('" + a.get(0) + "','" + a.get(1) + "','" + a.get(2) + "','" +a.get(3)+"','"+ id+".png');");
-            }
-            
-            else if ( !hayDNI && !hayTele) {
-                set.executeUpdate("INSERT INTO clientes(email,contrasena,nombre,path) VALUES ('" + a.get(0) + "','" + a.get(1) + "','" + a.get(2) + "','" +id+".png');");
-            }
-           
-            
 
             response.setContentType("text/html;charset=UTF-8");
             try (PrintWriter out = response.getWriter()) {

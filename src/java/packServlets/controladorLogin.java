@@ -60,12 +60,12 @@ public class controladorLogin extends HttpServlet {
                 cad = rs.getString("email");
                 cad = cad.trim();
                 if (cad.compareTo(emailrecogido.trim()) == 0) {
-                    existe = true;
-                }
-                if (existe) {
+                    System.out.println("Email bien");
+                
                     String cont = rs.getString("contrasena");
                     String cad2 = cont.trim();
                     if (cad2.compareTo(contrasenarecogida.trim()) == 0) {
+                        System.out.println("Contra tambien bien");
                         String nombrelogin = rs.getString("nombre");
                         s.setAttribute("nombrelogin", nombrelogin);
                         s.setAttribute("emaillogin", emailrecogido);
@@ -119,7 +119,7 @@ public class controladorLogin extends HttpServlet {
                         }
                     }
                 }
-                if (!existe) {
+                else {
                     //request.getRequestDispatcher("pantallaLoginInco.jsp").forward(request, response); 
                     response.setContentType("text/html;charset=UTF-8");
                     try (PrintWriter out = response.getWriter()) {

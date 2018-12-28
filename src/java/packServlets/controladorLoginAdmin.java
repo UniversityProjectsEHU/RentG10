@@ -48,6 +48,7 @@ public class controladorLoginAdmin extends HttpServlet {
             throws ServletException, IOException {
         String emailrecogido = request.getParameter("email");
         String contrasenarecogida = request.getParameter("contrasena");
+        
 
         con = BD.getConexion();
         HttpSession s = request.getSession(true);
