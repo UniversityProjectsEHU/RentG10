@@ -316,7 +316,7 @@ public class controladorRegistro extends HttpServlet {
 
                     hayFoto = true;
                     //Funciona con direcciones absolutas
-                    file = new File("C:\\Users\\Sergio\\Documents\\NetBeansProjects\\Sprint2\\RentG10\\web\\imagenes\\" + id + ".png");
+                    file = new File("C:\\Users\\serna\\Documents\\NetBeansProjects\\Sprint2\\RentG10V2\\RentG10\\web\\imagenes\\" + id + ".png");
                     //No funciona con relativas
                     //file = new File("imagenes/"+id+".png");
 
