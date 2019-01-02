@@ -21,8 +21,8 @@
             <div>
                 <h1>RentG</h1>
                 <h2>La plataforma de alquiler de coches lider en el Pais Vasco</h2>
-                <a href="pantallaInicial.html"><img src="../imagenes/logpng.png" id="imglogo"></a>
-                <img src="../imagenes/silueta.png" id="imgsilueta">
+                <a href="pantallaInicial.jsp"><img src="imagenes/logpng.png" id="imglogo"></a>
+                <img src="imagenes/silueta.png" id="imgsilueta">
             </div>
         </header>
         <nav id="menuprincipal">
@@ -72,8 +72,12 @@
 
 
                     <% }%>
+                    <form name="formcerrarsesion" action="cerrarsesion" id="formcerrarsesion" method="get">
+                        <input id="cerrarsesion" type="submit" value="Cerrar Sesion" /> 
+                    </form> 
 
-                    <img src="../imagenes/reservar.png" id="imgtitulo">
+                    <img src="imagenes/reservar.png" id="imgtitulo">
+                    <h3>Recuerda que no puede delvolver el coche el mismo dia en que lo reservas</h3>
                     <form name="formreserva" id="formreserva" method="get" action="controladorReserva">
                         <p>Coche:
                             <datalist id="coches" name="elcoche">
@@ -103,9 +107,9 @@
                     </form>
                 </section>
                 <section id="imagenescoches">
-                    <img src="../imagenes/coche1.PNG" id="imgcoche1">
-                    <img src="../imagenes/coche2.PNG" id="imgcoche2">
-                    <img src="../imagenes/coche3.PNG" id="imgcoche3">
+                    <img src="imagenes/coche1.PNG" id="imgcoche1">
+                    <img src="imagenes/coche2.PNG" id="imgcoche2">
+                    <img src="imagenes/coche3.PNG" id="imgcoche3">
                 </section>
             </div>
         </main>
