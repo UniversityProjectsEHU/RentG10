@@ -8,14 +8,9 @@ package packServlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.util.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,14 +24,14 @@ import utils.BD;
  *
  * @author serna
  */
-@WebServlet(name = "controladorReserva", urlPatterns = {"/controladorReserva"})
-public class controladorReserva extends HttpServlet {
+@WebServlet(name = "controladorCancelacion", urlPatterns = {"/controladorCancelacion"})
+public class controladorCancelacion extends HttpServlet {
 
     private Connection con;
     private Statement set;
     private ResultSet rs;
-    String cad;
 
+    @Override
     public void init(ServletConfig cfg) throws ServletException {
         con = BD.getConexion();
     }
@@ -58,10 +53,10 @@ public class controladorReserva extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet controladorReserva</title>");
+            out.println("<title>Servlet controladorCancelacion</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet controladorReserva at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet controladorCancelacion at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -79,132 +74,16 @@ public class controladorReserva extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String cocheelegido = request.getParameter("coches");
-        String fechasalida = request.getParameter("fechasalida");
-        String horasalida = request.getParameter("horasalida");
-        String fechallegada = request.getParameter("fechallegada");
-        String horallegada = request.getParameter("horallegada");
-        String ellugar = request.getParameter("lugares");
-        HttpSession s = request.getSession(true);
-        String email = (String) s.getAttribute("emaillogin");
-        boolean correcta = false;
-
         con = BD.getConexion();
-        System.out.println(fechasalida);
-        System.out.println(horallegada);
-        System.out.println(cocheelegido);
-        System.out.println(ellugar);
-
-        if (email == null) {
-            request.getRequestDispatcher("pantallaavisoReserva.jsp").forward(request, response);
-        }
-
-        String[] fechaS = fechasalida.split("-");
-        String[] fechaL = fechallegada.split("-");
-        String fechaSal = fechaS[0] + fechaS[1] + fechaS[2];
-        String fechaLleg = fechaL[0] + fechaL[1] + fechaL[2];
-        int fechaSalEntero = Integer.parseInt(fechaSal);
-        int fechaLlegEntero = Integer.parseInt(fechaLleg);
-
-        Date today = new Date();
-        int dd = today.getDate();
-        int mm = today.getMonth() + 1; //January is 0!
-        int yyyy = today.getYear() + 1900;
-        String dia;
-        String mes;
-        if (dd < 10) {
-            dia = "0" + Integer.toString(dd);
-        } else {
-            dia = Integer.toString(dd);
-        }
-        if (mm < 10) {
-            mes = "0" + Integer.toString(mm);
-        } else {
-            mes = Integer.toString(mm);
-        }
-
-        String año = Integer.toString(yyyy);
-        String hoy = año + mes + dia;
-        int hoy2 = Integer.parseInt(hoy);
-
-        System.out.println(fechaSalEntero);
-        System.out.println(fechaLlegEntero);
-        System.out.println(hoy2);
-        System.out.println(dia);
-        System.out.println(mes);
-        System.out.println(año);
-
-        int hora = today.getHours();
-        int min = today.getMinutes();
-        String hora2 = Integer.toString(hora);
-        String min2 = Integer.toString(min);
-        String hoy3 = hora2 + min2;
-        int horahoy = Integer.parseInt(hoy3);
-
-        String[] horaS = horasalida.split(":");
-        String[] horaL = horallegada.split(":");
-        String horaSal = horaS[0] + horaS[1];
-        String horaLleg = horaL[0] + horaL[1];
-        int horaSalEntero = Integer.parseInt(horaSal);
-        int horaLlegEntero = Integer.parseInt(horaLleg);
-
-        if (hoy2 < fechaSalEntero && fechaSalEntero < fechaLlegEntero) {
-            correcta = true;
-        } else if (hoy2 == fechaSalEntero && fechaSalEntero < fechaLlegEntero) {
-            if (horahoy <= horaSalEntero) {
-                correcta = true;
-            }
-        }
+        HttpSession s = request.getSession(true);
+        String id = request.getParameter("elid");
+        String emaillog = (String)s.getAttribute("emaillogin");
         
         try {
-            //email cochelegido fechaSalEntero fechaLlegEntero
-            set=con.createStatement();
-            rs = set.executeQuery("select * from reservar where matricula='" + cocheelegido + "'");
-            System.out.println("CHI");
-            while (rs.next()) {
-                String fechaIBD = rs.getString("fechaI");
-                String fechaFBD = rs.getString("fechaF");
-                String[] tempI = fechaIBD.split("-");
-                String[] tempF = fechaFBD.split("-");
-                int tempIe = Integer.parseInt(tempI[0] + tempI[1] + tempI[2]);
-                int tempFe = Integer.parseInt(tempF[0] + tempF[1] + tempF[2]);
-                System.out.println(tempIe +"----"+tempFe);
-                System.out.println(fechaSalEntero+"----"+fechaLlegEntero);
-                if(fechaSalEntero>tempIe&&fechaLlegEntero<tempFe){
-                    System.out.println("1");
-                    correcta=false;
-                }
-                else if(fechaSalEntero>tempIe&&fechaSalEntero<tempFe){
-                    System.out.println("2");
-                    correcta=false;
-                }
-                else if(fechaLlegEntero<tempIe&&fechaLlegEntero<tempFe){
-                    System.out.println("3");
-                    correcta=false;
-                }
-                else if(fechaSalEntero<tempIe&&fechaLlegEntero<tempFe&&fechaLlegEntero>tempIe){
-                    System.out.println("4");
-                    correcta=false;
-                }
-                else if(fechaLlegEntero<tempIe&&fechaSalEntero<tempFe&&fechaSalEntero>tempIe){
-                    System.out.println("5");
-                    correcta=false;
-                }
-
-
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(controladorReserva.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println(correcta);
-        if (correcta == true) {
-            try {
-                set = con.createStatement();
-                set.executeUpdate("INSERT INTO reservar (email,matricula,horaI,fechaI,horaF,fechaF,lugar,estado) VALUES  ('" + email + "','" + cocheelegido + "','" + horasalida + "','" + fechasalida + "','" + horallegada + "','" + fechallegada + "','" + ellugar + "','" + "activa" + "'"+ ")");
-            } catch (SQLException ex) {
-                Logger.getLogger(controladorReserva.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            set = con.createStatement();
+            int mod=set.executeUpdate("Update reservar set estado='cancelada' where id='" + id + "' and email='"+emaillog+"'");
+            if(mod==1){
+            response.setContentType("text/html;charset=UTF-8");
             try (PrintWriter out = response.getWriter()) {
                 /* TODO output your page here. You may use following sample code. */
                 out.println("<!DOCTYPE html>");
@@ -235,7 +114,7 @@ public class controladorReserva extends HttpServlet {
                         + "            </div>\n"
                         + "        </nav>\n"
                         + "        <main>\n"
-                        + "                    <img src=\"imagenes/reservacon.PNG\" id=\"imgtitulo\">\n"
+                        + "                    <img src=\"imagenes/cancelacionexito.PNG\" id=\"imgtitulo\">\n"
                         + "                    <a href=\"pantallaInicial.jsp\">Volver Inicio</a>\n"
                         + "        </main>\n"
                         + "        <footer>\n"
@@ -248,7 +127,9 @@ public class controladorReserva extends HttpServlet {
                         + "</html>");
 
             }
-        } else {
+            }
+            if(mod==0){
+               response.setContentType("text/html;charset=UTF-8");
             try (PrintWriter out = response.getWriter()) {
                 /* TODO output your page here. You may use following sample code. */
                 out.println("<!DOCTYPE html>");
@@ -279,7 +160,7 @@ public class controladorReserva extends HttpServlet {
                         + "            </div>\n"
                         + "        </nav>\n"
                         + "        <main>\n"
-                        + "                    <img src=\"imagenes/reservasin.PNG\" id=\"imgtitulo\">\n"
+                        + "                    <img src=\"imagenes/cancelacionmal.PNG\" id=\"imgtitulo\">\n"
                         + "                    <a href=\"pantallaInicial.jsp\">Volver Inicio</a>\n"
                         + "        </main>\n"
                         + "        <footer>\n"
@@ -291,8 +172,15 @@ public class controladorReserva extends HttpServlet {
                         + "    </body>\n"
                         + "</html>");
 
+            }  
             }
+        } catch (SQLException ex1) {
+            System.out.println("No lee de la tabla Jugadores. " + ex1);
+            response.setContentType("text/html;charset=UTF-8");
+           
         }
+
+        processRequest(request, response);
     }
 
     /**

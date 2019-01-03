@@ -1,6 +1,6 @@
 <%-- 
-    Document   : pantallaReservar
-    Created on : 02-ene-2019, 16:25:56
+    Document   : pantallaLogin
+    Created on : 22-dic-2018, 12:54:26
     Author     : serna
 --%>
 
@@ -12,9 +12,11 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>RentG - Reserva</title>
+        <title>RentG - Login</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="css/cssReservar.css">
+        <link rel="stylesheet" href="css/cssLogin.css"/>
+        <!--a-->
+
     </head>
     <body>
         <header id="cabecera">
@@ -26,6 +28,7 @@
             </div>
         </header>
         <nav id="menuprincipal">
+             
             <div>
                 <ul>
                     <li><a href="pantallaLogin.jsp">Login</a></li>
@@ -38,8 +41,7 @@
         </nav>
         <main>
             <div>
-                <section id="reserva">
-                    HOLA,
+                 HOLA,
                     <% String elnombre = (String) session.getAttribute("nombrelogin");
                         String path;
                         if (elnombre == null) {
@@ -73,46 +75,20 @@
 
 
                     <% }%>
+
+
                     <form name="formcerrarsesion" action="cerrarsesion" id="formcerrarsesion" method="get">
                         <input id="cerrarsesion" type="submit" value="Cerrar Sesion" /> 
                     </form> 
 
-                    <img src="imagenes/reservar.png" id="imgtitulo">
-                    <h3>Recuerda que no puede delvolver el coche el mismo dia en que lo reservas</h3>
-                    <form name="formreserva" id="formreserva" method="get" action="controladorReserva">
-                        <p>Coche:
-                            <datalist id="coches" name="elcoche">
-                                <option value="abc789" label="Mercedes">
-                                <option value="abc123" label="Fiat">                                
-                                <option value="cba547" label="Jaguar">
-                            </datalist>
-                            <input name="coches" id="cochesin" list="coches" placeholder="Elige un coche..." />
-                        <p><br/></p>
-                        <p>Fecha de salida:<input type="date" name="fechasalida" id="fechasalida" />
-                        <p><br/></p>
-                        <p>Hora de salida:<input type="time" name="horasalida" id="horasalida" />
-                        <p><br/></p>
-                        <p>Fecha de llegada:<input type="date" name="fechallegada" id="fechallegada" />
-                        <p><br/></p>
-                        <p>Hora de llegada:<input type="time" name="horallegada" id="horallegada" />
-                        <p><br/></p>
-                        <p>Lugar:
-                            <datalist id="lugar" name="lugar">
-                                <option value="Vitoria-Gasteiz" label="Lugar 1">
-                                <option value="Bilbao" label="Lugar 2">                                
-                                <option value="Donostia" label="Lugar 3">
-                            </datalist>
-                            <input name="lugares" id="lugares" list="lugar" placeholder="Elige un lugar..." />
-                        <p><br/></p>
-                        <p><input id="botonenviar" type="submit" value="Enviar" />
-                    </form>
-                </section>
-                <section id="imagenescoches">
-                    <img src="imagenes/coche1.PNG" id="imgcoche1">
-                    <img src="imagenes/coche2.PNG" id="imgcoche2">
-                    <img src="imagenes/coche3.PNG" id="imgcoche3">
-                </section>
+                <img src="imagenes/cancelacion.PNG" id="imgtitulo">
+                <form name="formCancelar" action="controladorCancelacion" id="formC" method="get">
+                    <p>ID de la reserva a cancelar: <input type="text" name="elid" id="elid" required="" />
+                    <p><input id="botonC" type="submit" value="Cancelar Reserva" />
+                </form> 
+
             </div>
+
         </main>
         <footer>
             <section class="direccion">
@@ -122,3 +98,4 @@
         </footer>
     </body>
 </html>
+

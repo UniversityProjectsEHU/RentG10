@@ -31,6 +31,7 @@
                     <li><a href="pantallaLogin.jsp">Login</a></li>
                     <li><a href="pantallaReservar.jsp">Reservar</a></li>
                     <li><a href="pantallaConsultaUsuario.jsp">Consultar Reservas</a></li>
+                    <li><a href="pantallaCancelarReserva.jsp">Cancelar Reservas</a></li>
                     <li><a href="">Contacto</a></li>
                 </ul>
             </div>

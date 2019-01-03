@@ -1,19 +1,19 @@
 <%-- 
-    Document   : pantallaConsultaUsuario
-    Created on : 03-ene-2019, 10:58:19
+    Document   : pantallaAdminFecha
+    Created on : 03-ene-2019, 11:40:45
     Author     : serna
 --%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="utils.BD"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.Statement"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>RentG - Consulta Reservas</title>
+        <title>RentG - Consulta Reservas Admin</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/cssConsultaUsuario.css">
     </head>
@@ -40,48 +40,47 @@
         <main>
             <div>
                 <section id="consulta">
-                    HOLA,
-                    <% String elnombre = (String) session.getAttribute("nombrelogin");
-                        String path;
-                        if (elnombre == null) {
-                            elnombre = "No esta logueado";
-                    %>
-                    <label id="nombree"><%=elnombre%></label>
+                HOLA,
+                <% String elnombre = (String) session.getAttribute("nombrelogin");
+                    String path;
+                    System.out.println(elnombre);
+                    if (elnombre == null) {
+                        elnombre = "No esta logueado";
+                %>
+                <label id="nombree"><%=elnombre%></label>
 
-                    <%
+                <%
 
-                    } else if (elnombre == "Alfonso" || elnombre == "Antonia") {
-                    %>
-                    <label id="nombree"><%=elnombre%></label>
-                    <img id="fotolog" src=imagenes/admin.PNG </img>
-                    <%
-                    } else if (elnombre.equals("Antonia")) {
-                    %>
-                    <label id="nombree"><%=elnombre%></label>
-                    <img id="fotolog" src=imagenes/adminmujfoto.jpg</img>
-                    <%
-                    } else {
-                        System.out.println(elnombre);
-                        Connection con = BD.getConexion();
-                        Statement st = con.createStatement();
-                        ResultSet rs = st.executeQuery("select path from clientes where nombre='" + elnombre + "'");
-                        rs.next();
-                        path = "imagenes/" + rs.getString(1);
+                } else if (elnombre.equals("Alfonso")) {
+                %>
+                <label id="nombree"><%=elnombre%></label>
+                <img id="fotolog" src=imagenes/adminfoto.png </img>
+                <%
+                } else if (elnombre.equals("Antonia")) {
+                %>
+                <label id="nombree"><%=elnombre%></label>
+                <img id="fotolog" src=imagenes/adminmujfoto.jpg</img>
+                <%
+                } else {
+                    System.out.println(elnombre);
+                    Connection con = BD.getConexion();
+                    Statement st = con.createStatement();
+                    ResultSet rs = st.executeQuery("select path from clientes where nombre='" + elnombre + "'");
+                    rs.next();
+                    path = "imagenes/" + rs.getString(1);
 
-                    %>
-                    <label id="nombree"><%=elnombre%></label>
-                    <img id="fotolog" src=<%=path%> </img>
-
-
-                    <% }%>
+                %>
+                <label id="nombree"><%=elnombre%></label>
+                <img id="fotolog" src=<%=path%> </img>
 
 
-                    <form name="formcerrarsesion" action="cerrarsesion" id="formcerrarsesion" method="get">
-                        <input id="cerrarsesion" type="submit" value="Cerrar Sesion" /> 
-                    </form> 
+                <% }%>
+                <form name="formcerrarsesion" action="cerrarsesion" id="formcerrarsesion" method="get">
+                    <input id="cerrarsesion" type="submit" value="Cerrar Sesion" /> 
+                </form> 
                     <img src="imagenes/consulta.png" id="imgtitulo">
-                    <form id="formconsulta" method="get" action="controladorConsultaUsuario">
-                        <p>Fecha: <input type="date" name="fecha" id="fecha" />
+                    <form id="formconsulta" method="get" action="controladorConsultaAdminCliente">
+                        <p>Matricula: <input type="text" name="matriculacliente" id="matriculacliente" />
                         <p><br/></p>
                         <p><input id="botonenviar" type="submit" value="Enviar" />
                     </form>
@@ -94,13 +93,13 @@
                         ResultSet rs;
                         Connection con = BD.getConexion();
                         try {
-                            String email = (String) session.getAttribute("emaillogin");
-                            String lafecha = (String) session.getAttribute("fechaconsulta");
+                            String mat = (String) session.getAttribute("matriculaclienteconsult");
                             set = con.createStatement();
-                            rs = set.executeQuery("SELECT * FROM reservar where email=" + "'" + email + "'");
+                            rs = set.executeQuery("SELECT * FROM reservar where matricula=" + "'" + mat + "'");
                             while (rs.next()) {
                                 int id = rs.getInt("id");
                                 String matri = rs.getString("matricula");
+                                String email = rs.getString("email");
                                 String lugar = rs.getString("lugar");
                                 String estado = rs.getString("estado");
                                 String fechaI = rs.getString("fechaI");
@@ -108,15 +107,8 @@
                                 String horaI = rs.getString("horaI");
                                 String horaF = rs.getString("horaF");
 
-                                String[] fechaS = fechaI.split("-");
-                                String fechaSal = fechaS[0] + fechaS[1] + fechaS[2];
-                                int fechaSalEntero = Integer.parseInt(fechaSal);
 
-                                String[] fechaM = lafecha.split("-");
-                                String fechaMetida = fechaM[0] + fechaM[1] + fechaM[2];
-                                int fechaMetidaEntero = Integer.parseInt(fechaMetida);
-
-                                if (fechaMetidaEntero <= fechaSalEntero) {
+                                if (1==1) {
                     %>       
                     <tr><td><%=id%></td>
                         <td><%=email%></td>
@@ -146,4 +138,7 @@
         </footer>
     </body>
 </html>
+
+
+
 
