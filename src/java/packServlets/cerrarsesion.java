@@ -37,6 +37,7 @@ public class cerrarsesion extends HttpServlet {
             throws ServletException, IOException {
             HttpSession s = request.getSession(true);  
             s.setAttribute("nombrelogin", null);
+             s.setAttribute("emaillogin", null);
             request.getRequestDispatcher("pantallaInicial.jsp").forward(request, response);
     }
 

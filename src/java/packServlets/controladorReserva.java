@@ -159,7 +159,7 @@ public class controladorReserva extends HttpServlet {
         if (correcta == true) {
             try {
                 set = con.createStatement();
-                set.executeUpdate("INSERT INTO reservar (email,matricula,horaI,fechaI,horaF,fechaF,lugar) VALUES  ('" + email + "','" + cocheelegido + "','" + horasalida + "','" + fechasalida + "','" + horallegada + "','" + fechallegada + "','" + ellugar + "'" + ")");
+                set.executeUpdate("INSERT INTO reservar (email,matricula,horaI,fechaI,horaF,fechaF,lugar,estado) VALUES  ('" + email + "','" + cocheelegido + "','" + horasalida + "','" + fechasalida + "','" + horallegada + "','" + fechallegada + "','" + ellugar + "','" + "activa" + "'"+ ")");
             } catch (SQLException ex) {
                 Logger.getLogger(controladorReserva.class.getName()).log(Level.SEVERE, null, ex);
             }
