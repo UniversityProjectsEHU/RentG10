@@ -28,7 +28,7 @@
             </div>
         </header>
         <nav id="menuprincipal">
-             
+
             <div>
                 <ul>
                     <li><a href="pantallaLogin.jsp">Login</a></li>
@@ -41,49 +41,52 @@
         </nav>
         <main>
             <div>
-                  HOLA,
-                    <% String elnombre = (String) session.getAttribute("nombrelogin");
-                        String path;
-                        System.out.println(elnombre);
-                        if (elnombre == null) {
-                            elnombre = "No esta logueado";
-                    %>
-                    <label id="nombree"><%=elnombre%></label>
+                HOLA,
+                <% String elnombre = (String) session.getAttribute("nombrelogin");
+                    String path;
+                    System.out.println(elnombre);
+                    if (elnombre == null) {
+                        elnombre = "No esta logueado";
+                %>
+                <label id="nombree"><%=elnombre%></label>
 
-                    <%
+                <%
 
-                    } else if (elnombre.equals("Alfonso")) {
-                    %>
-                    <label id="nombree"><%=elnombre%></label>
-                    <img id="fotolog" src=imagenes/adminfoto.png </img>
-                    <%
-                    } else if (elnombre.equals("Antonia")) {
-                    %>
-                    <label id="nombree"><%=elnombre%></label>
-                    <img id="fotolog" src=imagenes/adminmujfoto.jpg</img>
-                    <%
-                    } else {
-                        System.out.println(elnombre);
-                        Connection con = BD.getConexion();
-                        Statement st = con.createStatement();
-                        ResultSet rs = st.executeQuery("select path from clientes where nombre='" + elnombre + "'");
-                        rs.next();
-                        path = "imagenes/" + rs.getString(1);
+                } else if (elnombre.equals("Alfonso")) {
+                %>
+                <label id="nombree"><%=elnombre%></label>
+                <img id="fotolog" src=imagenes/adminfoto.png </img>
+                <%
+                } else if (elnombre.equals("Antonia")) {
+                %>
+                <label id="nombree"><%=elnombre%></label>
+                <img id="fotolog" src=imagenes/adminmujfoto.jpg</img>
+                <%
+                } else {
+                    System.out.println(elnombre);
+                    Connection con = BD.getConexion();
+                    Statement st = con.createStatement();
+                    ResultSet rs = st.executeQuery("select path from clientes where nombre='" + elnombre + "'");
+                    rs.next();
+                    path = "imagenes/" + rs.getString(1);
 
-                    %>
-                    <label id="nombree"><%=elnombre%></label>
-                    <img id="fotolog" src=<%=path%> </img>
+                %>
+                <label id="nombree"><%=elnombre%></label>
+                <img id="fotolog" src=<%=path%> </img>
 
 
-                    <% }%>
-                    <form name="formcerrarsesion" action="cerrarsesion" id="formcerrarsesion" method="get">
-                        <input id="cerrarsesion" type="submit" value="Cerrar Sesion" /> 
-                    </form> 
+                <% }%>
+                <form name="formcerrarsesion" action="cerrarsesion" id="formcerrarsesion" method="get">
+                    <input id="cerrarsesion" type="submit" value="Cerrar Sesion" /> 
+                </form> 
 
                 <img src="imagenes/adminreservasSI.PNG" id="imgtitulo">
-                
-                <h2>La reserva ha sido finalizada con exito, es necesario un recargo de <%%> euros.</h2>
-                
+                <% double recarg = (double) session.getAttribute("elrecargo");
+                    double prec = (double) session.getAttribute("elprecio");
+                    double tot = recarg + prec;%>
+                <h2>La reserva ha sido finalizada con exito, es necesario un recargo de <%=recarg%> euros.</h2>
+                <h2>El precio de tu alquiler a sido de <%=prec%> euros.</h2> 
+                <h1>TOTAL: <%=tot%> euros.</h1> 
 
             </div>
 

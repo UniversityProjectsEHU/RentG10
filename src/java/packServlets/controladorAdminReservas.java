@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,7 +32,9 @@ public class controladorAdminReservas extends HttpServlet {
     private Statement set;
     private Statement set2;
     private Statement set3;
+    private Statement set4;
     private ResultSet rs;
+    private ResultSet rs4;
 
     @Override
     public void init(ServletConfig cfg) throws ServletException {
@@ -136,14 +139,73 @@ public class controladorAdminReservas extends HttpServlet {
                             + "</html>");
 
                 }
-            } else if (boton.equals("Reserva finalizada") && cad.equals("cancelada")==false) {
+            } else if (boton.equals("Reserva finalizada") && cad.equals("cancelada") == false) {
                 sepuede = true;
                 set3 = con.createStatement();
                 set3.executeUpdate("Update reservar set estado='finalizada' where id='" + id + "'");
+
+                set4 = con.createStatement();
+                rs4 = set4.executeQuery("select * from reservar where id='" + id + "';");
+                rs4.next();
+
+                String fFi[] = rs.getString("fechaI").split("-");
+                //int fechaF = Integer.parseInt(fF[0] + fF[1] + fF[2]);
+                String[] horaFi = rs.getString("horaI").split(":");
+                //int hora = Integer.parseInt(horaF[0] + horaF[1]);
+
+                Date hoyi = new Date();
+                int añoi = Integer.parseInt(fFi[0]);
+                int mesi = Integer.parseInt(fFi[1]);
+                int diai = Integer.parseInt(fFi[2]);
+                int horai = Integer.parseInt(horaFi[0]);
+                int mini = Integer.parseInt(horaFi[1]);
+
+                String fF[] = rs4.getString("fechaF").split("-");
+                //int fechaF = Integer.parseInt(fF[0] + fF[1] + fF[2]);
+                String[] horaF = rs4.getString("horaF").split(":");
+                //int hora = Integer.parseInt(horaF[0] + horaF[1]);
+                Date fechadadaI = new Date(añoi - 1900, mesi - 1, diai, horai, mini);
+
+                Date hoy = new Date();
+                int año = Integer.parseInt(fF[0]);
+                int mes = Integer.parseInt(fF[1]);
+                int dia = Integer.parseInt(fF[2]);
+                int hora = Integer.parseInt(horaF[0]);
+                int min = Integer.parseInt(horaF[1]);
+                System.out.println(año);
+                System.out.println(Integer.parseInt(horaF[0]));
+                long i = System.currentTimeMillis();
+                System.out.println("i es :" + i);
+
+                Date fechadada = new Date(año - 1900, mes - 1, dia, hora, min);
+                // Date fechadada=new Date(2019, 1, 10, 4, 5);
+                System.out.println(fechadada.getTime());
+                System.out.println(hoy.getTime());
+                System.out.println(hoy.toString());
+                System.out.println(fechadada.toString());
+
+                long josupi = i - fechadada.getTime();
+                long precio = fechadada.getTime() - fechadadaI.getTime();
+
+                if (josupi >= 0) { //SI tiene recargo
+                    double recargo1 = josupi / 60000;
+                    double recargo2 = recargo1 * (0.5);
+
+                    double precio1 = (precio / 3600000) * 2;
+                    s.setAttribute("elrecargo", recargo2);
+                    s.setAttribute("elprecio", precio1);
+                }
+                if (josupi < 0) { //NO tiene recargo
+                    double recargo3 = 0;
+                    double recargo1 = josupi / 60000;
+                    double recargo2 = recargo1 * (0.5);
+                    double precio1 = (precio / 3600000) * 2;
+                    s.setAttribute("elprecio", precio1);
+                    s.setAttribute("elrecargo", recargo3);
+                }
                 //AQUI VA EL CALCULO DEL RECARGO
-                response.sendRedirect("pantallaRecargo.jsp"); 
-            } 
-            else if(sepuede==false){
+                response.sendRedirect("pantallaRecargo.jsp");
+            } else if (sepuede == false) {
                 try (PrintWriter out = response.getWriter()) {
                     /* TODO output your page here. You may use following sample code. */
                     out.println("<!DOCTYPE html>");
@@ -196,7 +258,8 @@ public class controladorAdminReservas extends HttpServlet {
             processRequest(request, response);
         }
 
-    } 
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
@@ -207,7 +270,6 @@ public class controladorAdminReservas extends HttpServlet {
      *
      * @return a String containing servlet description
      */
-
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
