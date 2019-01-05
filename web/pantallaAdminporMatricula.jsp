@@ -79,13 +79,13 @@
                     <input id="cerrarsesion" type="submit" value="Cerrar Sesion" /> 
                 </form> 
                     <img src="imagenes/consulta.png" id="imgtitulo">
-                    <form id="formconsulta" method="get" action="controladorConsultaAdminCliente">
+                    <form id="formconsulta" method="get" action="controladorConsultaAdminMatricula">
                         <p>Matricula: <input type="text" name="matriculacliente" id="matriculacliente" />
                         <p><br/></p>
                         <p><input id="botonenviar" type="submit" value="Enviar" />
                     </form>
                 </section> 
-                <h1>Estas son tus reservas a partir de la fecha indicada</h1>
+                <h1>Estas son las reservas de la matricula indicada:</h1>
                 <table border=1>
                     <tr><td><b>ID</b></td><td><b>Email</b></td><td><b>Matricula</b></td><td><b>HoraInicio</b></td><td><b>FechaInicio</b></td><td><b>HoraFinal</b></td><td><b>FechaFinal</b></td><td><b>Lugar</b></td><td><b>Estado</b></td></tr>
                     <%
@@ -93,7 +93,7 @@
                         ResultSet rs;
                         Connection con = BD.getConexion();
                         try {
-                            String mat = (String) session.getAttribute("matriculaclienteconsult");
+                            String mat = (String) session.getAttribute("matriconsultacon");
                             set = con.createStatement();
                             rs = set.executeQuery("SELECT * FROM reservar where matricula=" + "'" + mat + "'");
                             while (rs.next()) {

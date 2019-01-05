@@ -43,6 +43,7 @@
                     HOLA,
                     <% String elnombre = (String) session.getAttribute("nombrelogin");
                         String path;
+                        System.out.println(elnombre);
                         if (elnombre == null) {
                             elnombre = "No esta logueado";
                     %>
@@ -50,10 +51,10 @@
 
                     <%
 
-                    } else if (elnombre == "Alfonso" || elnombre == "Antonia") {
+                    } else if (elnombre.equals("Alfonso")) {
                     %>
                     <label id="nombree"><%=elnombre%></label>
-                    <img id="fotolog" src=imagenes/admin.PNG </img>
+                    <img id="fotolog" src=imagenes/adminfoto.png </img>
                     <%
                     } else if (elnombre.equals("Antonia")) {
                     %>
@@ -74,8 +75,6 @@
 
 
                     <% }%>
-
-
                     <form name="formcerrarsesion" action="cerrarsesion" id="formcerrarsesion" method="get">
                         <input id="cerrarsesion" type="submit" value="Cerrar Sesion" /> 
                     </form> 

@@ -85,7 +85,7 @@
                         <p><input id="botonenviar" type="submit" value="Enviar" />
                     </form>
                 </section> 
-                <h1>Estas son tus reservas a partir de la fecha indicada</h1>
+                <h1>Estas son las reservas a partir de la fecha indicada:</h1>
                 <table border=1>
                     <tr><td><b>ID</b></td><td><b>Email</b></td><td><b>Matricula</b></td><td><b>HoraInicio</b></td><td><b>FechaInicio</b></td><td><b>HoraFinal</b></td><td><b>FechaFinal</b></td><td><b>Lugar</b></td><td><b>Estado</b></td></tr>
                     <%

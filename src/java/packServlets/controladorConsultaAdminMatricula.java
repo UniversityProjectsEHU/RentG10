@@ -75,9 +75,9 @@ public class controladorConsultaAdminMatricula extends HttpServlet {
             throws ServletException, IOException {
         con = BD.getConexion();
         HttpSession s = request.getSession(true);
-        String email = request.getParameter("emailcliente");
-        s.setAttribute("emailconsulta", email);
-        request.getRequestDispatcher("pantallaAdminporCliente.jsp").forward(request, response);
+        String matricula = request.getParameter("matriculacliente");
+        s.setAttribute("matriconsultacon", matricula);
+        request.getRequestDispatcher("pantallaAdminporMatricula.jsp").forward(request, response);
         processRequest(request, response);
     }
 

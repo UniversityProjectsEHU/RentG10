@@ -1,6 +1,6 @@
 <%-- 
-    Document   : pantallaConsultaAdmin
-    Created on : 22-dic-2018, 15:30:24
+    Document   : pantallaLogin
+    Created on : 22-dic-2018, 12:54:26
     Author     : serna
 --%>
 
@@ -12,10 +12,11 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>RentG - Consulta Reservas</title>
+        <title>RentG - Login</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="css/cssConsultaAdmin.css">
-        <script src="javascript/jsConsultaAdmin.js"></script>
+        <link rel="stylesheet" href="css/cssLogin.css"/>
+        <!--a-->
+
     </head>
     <body>
         <header id="cabecera">
@@ -27,6 +28,7 @@
             </div>
         </header>
         <nav id="menuprincipal">
+
             <div>
                 <ul>
                     <li><a href="pantallaLogin.jsp">Login</a></li>
@@ -38,8 +40,8 @@
             </div>
         </nav>
         <main>
-            <div> 
-                HOLA,
+            <div>
+                 HOLA,
                 <% String elnombre = (String) session.getAttribute("nombrelogin");
                     String path;
                     System.out.println(elnombre);
@@ -77,17 +79,20 @@
                 <form name="formcerrarsesion" action="cerrarsesion" id="formcerrarsesion" method="get">
                     <input id="cerrarsesion" type="submit" value="Cerrar Sesion" /> 
                 </form> 
-                <section id="consulta">
-                    <img src="imagenes/consulAdmin.PNG" id="imgtitulo">
-                    <a href="pantallaAdminporFecha.jsp"><img src="imagenes/porfecha.PNG" id="imgfecha"></a>
-                    <a href="pantallaAdminporCliente.jsp"><img src="imagenes/poremail.PNG" id="imgemail"></a>
-                    <a href="pantallaAdminporMatricula.jsp"><img src="imagenes/pormatricula.PNG" id="imgmatricula"></a>
-                    <a href="pantallaAdminReservas.jsp"><img src="imagenes/iconoadminreservas.PNG" id="imgmatricula"></a>
-                    <form id="formconsulta" method="get" action="procesar.php">
 
-                    </form>
-                </section> 
+                <h2>Importante:</h2>
+                <h3>No es posible administrar una reserva que haya sido cancelada.</h3>
+                <h3>Es posible finalizar una reserva sin haber entregado las llaves en caso de que el cliente no se presente.</h3> 
+
+                <img src="imagenes/adminreservas.PNG" id="imgtitulo">
+                <form name="formCancelar" action="controladorAdminReservas" id="formC" method="get">
+                    <p>ID de la reserva a administrar: <input type="text" name="elid" id="elid" required="" />
+                    <p><input id="botonC" name="botones" type="submit" value="Llaves entregadas" />
+                    <p><input id="botonC" name="botones" type="submit" value="Reserva finalizada" />
+                </form> 
+
             </div>
+
         </main>
         <footer>
             <section class="direccion">
@@ -97,4 +102,5 @@
         </footer>
     </body>
 </html>
+
 
