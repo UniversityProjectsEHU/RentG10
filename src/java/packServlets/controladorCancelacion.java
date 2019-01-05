@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -74,113 +75,191 @@ public class controladorCancelacion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        boolean apto = true;
         con = BD.getConexion();
         HttpSession s = request.getSession(true);
         String id = request.getParameter("elid");
-        String emaillog = (String)s.getAttribute("emaillogin");
-        
+        String emaillog = (String) s.getAttribute("emaillogin");
+
         try {
             set = con.createStatement();
-            int mod=set.executeUpdate("Update reservar set estado='cancelada' where id='" + id + "' and email='"+emaillog+"'");
-            if(mod==1){
-            response.setContentType("text/html;charset=UTF-8");
-            try (PrintWriter out = response.getWriter()) {
-                /* TODO output your page here. You may use following sample code. */
-                out.println("<!DOCTYPE html>");
-                out.println("<html lang=\"es\">\n"
-                        + "    <head>\n"
-                        + "        <title>RentG</title>\n"
-                        + "        <meta charset=\"utf-8\">\n"
-                        + "        <link rel=\"stylesheet\" type=\"text/css\" href=\"css/cssPantallaPrincipal.css\"/>\n"
-                        + "        <script src=\"javascript/jsPantallaInicial.js\"></script>\n"
-                        + "    </head>\n"
-                        + "    <body>\n"
-                        + "        <header id=\"cabecera\">\n"
-                        + "            <div>\n"
-                        + "                <h1>RentG</h1>\n"
-                        + "                <h2>La plataforma de alquiler de coches lider en el Pais Vasco</h2>\n"
-                        + "                <a href=\"pantallaInicial.jsp\"><img src=\"imagenes\\logpng.png\" id=\"imglogo\"></a>\n"
-                        + "                <img src=\"imagenes/silueta.png\" id=\"imgsilueta\">\n"
-                        + "            </div>\n"
-                        + "        </header>\n"
-                        + "        <nav id=\"menuprincipal\">\n"
-                        + "            <div>\n"
-                        + "                <ul>\n"
-                        + "                    <li><a href=\"pantallaLogin.jsp\">Login</a></li>\n"
-                        + "                    <li><a href=\"pantallaReservar.jsp\">Reservar</a></li>\n"
-                        + "                    <li><a href=\"pantallaConsultaUsuario.jsp\">Consultar Reservas</a></li>\n"
-                        + "                    <li><a href=\"\">Contacto</a></li>\n"
-                        + "                </ul>\n"
-                        + "            </div>\n"
-                        + "        </nav>\n"
-                        + "        <main>\n"
-                        + "                    <img src=\"imagenes/cancelacionexito.PNG\" id=\"imgtitulo\">\n"
-                        + "                    <a href=\"pantallaInicial.jsp\">Volver Inicio</a>\n"
-                        + "        </main>\n"
-                        + "        <footer>\n"
-                        + "            <section class=\"direccion\">\n"
-                        + "                <address>Vitoria, País Vasco</address>\n"
-                        + "                <small>&copy; Derechos Reservados 2018</small>\n"
-                        + "            </section>\n"
-                        + "        </footer>\n"
-                        + "    </body>\n"
-                        + "</html>");
+            rs = set.executeQuery("select * from reservar where id='" + id + "' and email='" + emaillog + "';");
+            rs.next();
+            String fF[] = rs.getString("fechaI").split("-");
+            //int fechaF = Integer.parseInt(fF[0] + fF[1] + fF[2]);
+            String[] horaF = rs.getString("horaI").split(":");
+            //int hora = Integer.parseInt(horaF[0] + horaF[1]);
 
-            }
-            }
-            if(mod==0){
-               response.setContentType("text/html;charset=UTF-8");
-            try (PrintWriter out = response.getWriter()) {
-                /* TODO output your page here. You may use following sample code. */
-                out.println("<!DOCTYPE html>");
-                out.println("<html lang=\"es\">\n"
-                        + "    <head>\n"
-                        + "        <title>RentG</title>\n"
-                        + "        <meta charset=\"utf-8\">\n"
-                        + "        <link rel=\"stylesheet\" type=\"text/css\" href=\"css/cssPantallaPrincipal.css\"/>\n"
-                        + "        <script src=\"javascript/jsPantallaInicial.js\"></script>\n"
-                        + "    </head>\n"
-                        + "    <body>\n"
-                        + "        <header id=\"cabecera\">\n"
-                        + "            <div>\n"
-                        + "                <h1>RentG</h1>\n"
-                        + "                <h2>La plataforma de alquiler de coches lider en el Pais Vasco</h2>\n"
-                        + "                <a href=\"pantallaInicial.jsp\"><img src=\"imagenes\\logpng.png\" id=\"imglogo\"></a>\n"
-                        + "                <img src=\"imagenes/silueta.png\" id=\"imgsilueta\">\n"
-                        + "            </div>\n"
-                        + "        </header>\n"
-                        + "        <nav id=\"menuprincipal\">\n"
-                        + "            <div>\n"
-                        + "                <ul>\n"
-                        + "                    <li><a href=\"pantallaLogin.jsp\">Login</a></li>\n"
-                        + "                    <li><a href=\"pantallaReservar.jsp\">Reservar</a></li>\n"
-                        + "                    <li><a href=\"pantallaConsultaUsuario.jsp\">Consultar Reservas</a></li>\n"
-                        + "                    <li><a href=\"\">Contacto</a></li>\n"
-                        + "                </ul>\n"
-                        + "            </div>\n"
-                        + "        </nav>\n"
-                        + "        <main>\n"
-                        + "                    <img src=\"imagenes/cancelacionmal.PNG\" id=\"imgtitulo\">\n"
-                        + "                    <a href=\"pantallaInicial.jsp\">Volver Inicio</a>\n"
-                        + "        </main>\n"
-                        + "        <footer>\n"
-                        + "            <section class=\"direccion\">\n"
-                        + "                <address>Vitoria, País Vasco</address>\n"
-                        + "                <small>&copy; Derechos Reservados 2018</small>\n"
-                        + "            </section>\n"
-                        + "        </footer>\n"
-                        + "    </body>\n"
-                        + "</html>");
+            Date hoy = new Date();
+            int año = Integer.parseInt(fF[0]);
+            int mes = Integer.parseInt(fF[1]);
+            int dia = Integer.parseInt(fF[2]);
+            int hora = Integer.parseInt(horaF[0]);
+            int min = Integer.parseInt(horaF[1]);
+            System.out.println(año);
+            System.out.println(Integer.parseInt(horaF[0]));
+            long i = System.currentTimeMillis();
+            System.out.println("i es :" + i);
 
-            }  
+            Date fechadada = new Date(año - 1900, mes - 1, dia, hora, min);
+            // Date fechadada=new Date(2019, 1, 10, 4, 5);
+            System.out.println(fechadada.getTime());
+            System.out.println(hoy.getTime());
+            System.out.println(hoy.toString());
+            System.out.println(fechadada.toString());
+            long josupi = fechadada.getTime() - i;
+            if (josupi < 7200000) {
+                apto = false;
+            }
+
+            System.out.println(apto);
+            System.out.println(josupi);
+            if (apto) {
+                int mod = set.executeUpdate("Update reservar set estado='cancelada' where id='" + id + "' and email='" + emaillog + "'");
+                if (mod == 1) {
+                    response.setContentType("text/html;charset=UTF-8");
+                    try (PrintWriter out = response.getWriter()) {
+                        /* TODO output your page here. You may use following sample code. */
+                        out.println("<!DOCTYPE html>");
+                        out.println("<html lang=\"es\">\n"
+                                + "    <head>\n"
+                                + "        <title>RentG</title>\n"
+                                + "        <meta charset=\"utf-8\">\n"
+                                + "        <link rel=\"stylesheet\" type=\"text/css\" href=\"css/cssPantallaPrincipal.css\"/>\n"
+                                + "        <script src=\"javascript/jsPantallaInicial.js\"></script>\n"
+                                + "    </head>\n"
+                                + "    <body>\n"
+                                + "        <header id=\"cabecera\">\n"
+                                + "            <div>\n"
+                                + "                <h1>RentG</h1>\n"
+                                + "                <h2>La plataforma de alquiler de coches lider en el Pais Vasco</h2>\n"
+                                + "                <a href=\"pantallaInicial.jsp\"><img src=\"imagenes\\logpng.png\" id=\"imglogo\"></a>\n"
+                                + "                <img src=\"imagenes/silueta.png\" id=\"imgsilueta\">\n"
+                                + "            </div>\n"
+                                + "        </header>\n"
+                                + "        <nav id=\"menuprincipal\">\n"
+                                + "            <div>\n"
+                                + "                <ul>\n"
+                                + "                    <li><a href=\"pantallaLogin.jsp\">Login</a></li>\n"
+                                + "                    <li><a href=\"pantallaReservar.jsp\">Reservar</a></li>\n"
+                                + "                    <li><a href=\"pantallaConsultaUsuario.jsp\">Consultar Reservas</a></li>\n"
+                                + "                    <li><a href=\"\">Contacto</a></li>\n"
+                                + "                </ul>\n"
+                                + "            </div>\n"
+                                + "        </nav>\n"
+                                + "        <main>\n"
+                                + "                    <img src=\"imagenes/cancelacionexito.PNG\" id=\"imgtitulo\">\n"
+                                + "                    <a href=\"pantallaInicial.jsp\">Volver Inicio</a>\n"
+                                + "        </main>\n"
+                                + "        <footer>\n"
+                                + "            <section class=\"direccion\">\n"
+                                + "                <address>Vitoria, País Vasco</address>\n"
+                                + "                <small>&copy; Derechos Reservados 2018</small>\n"
+                                + "            </section>\n"
+                                + "        </footer>\n"
+                                + "    </body>\n"
+                                + "</html>");
+
+                    }
+                }
+                if (mod == 0) {
+                    response.setContentType("text/html;charset=UTF-8");
+                    try (PrintWriter out = response.getWriter()) {
+                        /* TODO output your page here. You may use following sample code. */
+                        out.println("<!DOCTYPE html>");
+                        out.println("<html lang=\"es\">\n"
+                                + "    <head>\n"
+                                + "        <title>RentG</title>\n"
+                                + "        <meta charset=\"utf-8\">\n"
+                                + "        <link rel=\"stylesheet\" type=\"text/css\" href=\"css/cssPantallaPrincipal.css\"/>\n"
+                                + "        <script src=\"javascript/jsPantallaInicial.js\"></script>\n"
+                                + "    </head>\n"
+                                + "    <body>\n"
+                                + "        <header id=\"cabecera\">\n"
+                                + "            <div>\n"
+                                + "                <h1>RentG</h1>\n"
+                                + "                <h2>La plataforma de alquiler de coches lider en el Pais Vasco</h2>\n"
+                                + "                <a href=\"pantallaInicial.jsp\"><img src=\"imagenes\\logpng.png\" id=\"imglogo\"></a>\n"
+                                + "                <img src=\"imagenes/silueta.png\" id=\"imgsilueta\">\n"
+                                + "            </div>\n"
+                                + "        </header>\n"
+                                + "        <nav id=\"menuprincipal\">\n"
+                                + "            <div>\n"
+                                + "                <ul>\n"
+                                + "                    <li><a href=\"pantallaLogin.jsp\">Login</a></li>\n"
+                                + "                    <li><a href=\"pantallaReservar.jsp\">Reservar</a></li>\n"
+                                + "                    <li><a href=\"pantallaConsultaUsuario.jsp\">Consultar Reservas</a></li>\n"
+                                + "                    <li><a href=\"\">Contacto</a></li>\n"
+                                + "                </ul>\n"
+                                + "            </div>\n"
+                                + "        </nav>\n"
+                                + "        <main>\n"
+                                + "                    <img src=\"imagenes/cancelacionmal.PNG\" id=\"imgtitulo\">\n"
+                                + "                    <a href=\"pantallaInicial.jsp\">Volver Inicio</a>\n"
+                                + "        </main>\n"
+                                + "        <footer>\n"
+                                + "            <section class=\"direccion\">\n"
+                                + "                <address>Vitoria, País Vasco</address>\n"
+                                + "                <small>&copy; Derechos Reservados 2018</small>\n"
+                                + "            </section>\n"
+                                + "        </footer>\n"
+                                + "    </body>\n"
+                                + "</html>");
+
+                    }
+                }
             }
         } catch (SQLException ex1) {
             System.out.println("No lee de la tabla Jugadores. " + ex1);
             response.setContentType("text/html;charset=UTF-8");
-           
+
         }
 
-        processRequest(request, response);
+        if (!apto) {
+            try (PrintWriter out = response.getWriter()) {
+                /* TODO output your page here. You may use following sample code. */
+                out.println("<!DOCTYPE html>");
+                out.println("<html lang=\"es\">\n"
+                        + "    <head>\n"
+                        + "        <title>RentG</title>\n"
+                        + "        <meta charset=\"utf-8\">\n"
+                        + "        <link rel=\"stylesheet\" type=\"text/css\" href=\"css/cssPantallaPrincipal.css\"/>\n"
+                        + "        <script src=\"javascript/jsPantallaInicial.js\"></script>\n"
+                        + "    </head>\n"
+                        + "    <body>\n"
+                        + "        <header id=\"cabecera\">\n"
+                        + "            <div>\n"
+                        + "                <h1>RentG</h1>\n"
+                        + "                <h2>La plataforma de alquiler de coches lider en el Pais Vasco</h2>\n"
+                        + "                <a href=\"pantallaInicial.jsp\"><img src=\"imagenes\\logpng.png\" id=\"imglogo\"></a>\n"
+                        + "                <img src=\"imagenes/silueta.png\" id=\"imgsilueta\">\n"
+                        + "            </div>\n"
+                        + "        </header>\n"
+                        + "        <nav id=\"menuprincipal\">\n"
+                        + "            <div>\n"
+                        + "                <ul>\n"
+                        + "                    <li><a href=\"pantallaLogin.jsp\">Login</a></li>\n"
+                        + "                    <li><a href=\"pantallaReservar.jsp\">Reservar</a></li>\n"
+                        + "                    <li><a href=\"pantallaConsultaUsuario.jsp\">Consultar Reservas</a></li>\n"
+                        + "                    <li><a href=\"\">Contacto</a></li>\n"
+                        + "                </ul>\n"
+                        + "            </div>\n"
+                        + "        </nav>\n"
+                        + "        <main>\n"
+                        + "                    <img src=\"imagenes/horacancelar.PNG\" id=\"imgtitulo\">\n"
+                        + "                    <a href=\"pantallaInicial.jsp\">Volver Inicio</a>\n"
+                        + "        </main>\n"
+                        + "        <footer>\n"
+                        + "            <section class=\"direccion\">\n"
+                        + "                <address>Vitoria, País Vasco</address>\n"
+                        + "                <small>&copy; Derechos Reservados 2018</small>\n"
+                        + "            </section>\n"
+                        + "        </footer>\n"
+                        + "    </body>\n"
+                        + "</html>");
+
+            }
+        }
     }
 
     /**
